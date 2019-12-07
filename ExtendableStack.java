@@ -20,11 +20,12 @@ public class ExtendableStack {
     }
 
     public void push(int item) {
-        int[] newarr = new int[this.items.length + 1];
-        for (int i = 0; i < this.items.length; i++) {
+        int len = this.items.length;
+        int[] newarr = new int[len + 1];
+        for (int i = 0; i < len; i++) {
             newarr[i] = this.items[i];
         }
-        newarr[this.items.length] = item;
+        newarr[len] = item;
         this.items = newarr;
     }
 
