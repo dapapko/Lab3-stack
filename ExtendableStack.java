@@ -1,4 +1,4 @@
-public class ExtendableStack {
+public class ExtendableStack implements Stack {
     private int[] items;
 
     public ExtendableStack() {
@@ -19,13 +19,15 @@ public class ExtendableStack {
         this.items = newarr;
     }
 
-    public void push(int item) {
-        int len = this.items.length;
-        int[] newarr = new int[len + 1];
-        for (int i = 0; i < len; i++) {
+    public void push(int item) throws StackOverflowException {
+        if (this.items.length +1 > Integer.MAX_VALUE - 2) {
+            throw new StackOverflowException();
+        }
+        int[] newarr = new int[this.items.length + 1];
+        for (int i = 0; i < this.items.length; i++) {
             newarr[i] = this.items[i];
         }
-        newarr[len] = item;
+        newarr[this.items.length] = item;
         this.items = newarr;
     }
 
@@ -37,4 +39,3 @@ public class ExtendableStack {
         }
     }
 }
-

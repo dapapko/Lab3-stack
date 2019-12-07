@@ -1,4 +1,4 @@
-public class StackWithPointer {
+public class StackWithPointer implements Stack {
     private int[] items;
     private int pointer;
 
@@ -33,4 +33,5 @@ public class StackWithPointer {
         }
         return this.items[this.pointer];
     }
+
 }

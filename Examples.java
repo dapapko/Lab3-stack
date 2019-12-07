@@ -1,6 +1,6 @@
 public class Examples {
     public static void main(String[] args) {
-        String exp = "(8+7)+(9*4))";
+        String exp = "(8+7)+(9*4)";
         boolean isValid = bracketsValidation(exp);
         if (isValid) {
             System.out.println("Valid");
@@ -16,15 +16,16 @@ public static char[] stringToListOfChars(String str) {
 public static boolean bracketsValidation(String expression){
       char[] strList = expression.toCharArray();
       ExtendableStack stack = new ExtendableStack();
+    try {
       for(int j=0; j< strList.length;j++) {
           if(strList[j] == '(') {
               stack.push(7);
           } else if (strList[j] == ')' ) {
-              try {
                   stack.pop();
-              } catch (EmptyStackException exc) {return false;}
-          }
+              }
       }
-    return stack.getLength() == 0;
-}
+    }  catch (EmptyStackException | StackOverflowException exc) { return false; }
+    try { stack.peek(); } catch (EmptyStackException exc) { return true; }
+    return false;
+    }
 }
