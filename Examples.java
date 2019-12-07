@@ -1,10 +1,19 @@
 public class Examples {
     public static void main(String[] args) {
-        String exp = "(8+7)+(9*4)";
-        boolean isValid = bracketsValidation(exp);
-        if (isValid) {
-            System.out.println("Valid");
-        } else {System.out.println("Invalid"); }
+       FixedStack st1 = new FixedStack(5);
+       try {
+           st1.push(10);
+           st1.push(20);
+           st1.push(30);
+           st1.push(40);
+           System.out.println(st1.search(60));
+       } catch (StackOverflowException ex) {
+           System.out.println("Stack overflow");
+       }
+       int[] arr = st1.toArray();
+       for(int a:arr) {
+           System.out.println(a);
+       }
     }
 public static char[] stringToListOfChars(String str) {
     char[] expList = new char[str.length()];
