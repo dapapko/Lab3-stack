@@ -1,4 +1,4 @@
-public class StackWithPointer implements Stack {
+public class StackWithPointer implements StackInterface {
     private int[] items;
     private int pointer;
 
@@ -11,7 +11,7 @@ public class StackWithPointer implements Stack {
         if (this.pointer == -1) {
             throw new EmptyStackException();
         }
-        int item = this.peek();
+        int item = this.top();
         this.items[this.pointer] = 0;
         this.pointer = this.pointer - 1;
         return item;
@@ -27,11 +27,14 @@ public class StackWithPointer implements Stack {
         }
     }
 
-    public int peek() throws EmptyStackException {
+    public int top() throws EmptyStackException {
         if (this.pointer == -1) {
             throw new EmptyStackException();
         }
         return this.items[this.pointer];
+    }
+    public boolean isEmpty(){
+        return this.pointer == -1;
     }
 
 }

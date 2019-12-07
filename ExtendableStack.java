@@ -1,4 +1,4 @@
-public class ExtendableStack implements Stack {
+public class ExtendableStack implements StackInterface {
     private int[] items;
 
     public ExtendableStack() {
@@ -6,9 +6,12 @@ public class ExtendableStack implements Stack {
     }
 
     public int pop() throws EmptyStackException {
-            int item = this.peek();
+            int item = this.top();
             delFromArray();
             return item;
+    }
+    public boolean isEmpty(){
+        return this.items.length == 0;
     }
 
     private void delFromArray() {
@@ -31,7 +34,7 @@ public class ExtendableStack implements Stack {
         this.items = newarr;
     }
 
-    public int peek() throws EmptyStackException {
+    public int top() throws EmptyStackException {
         if (this.items.length == 0) {
             throw new EmptyStackException();
         } else {

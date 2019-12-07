@@ -24,8 +24,9 @@ public static boolean bracketsValidation(String expression){
                   stack.pop();
               }
       }
-    }  catch (EmptyStackException | StackOverflowException exc) { return false; }
-    try { stack.peek(); } catch (EmptyStackException exc) { return true; }
-    return false;
+    }  catch (EmptyStackException | StackOverflowException exc) {
+        return false;
+    }
+    return stack.isEmpty();
     }
 }
