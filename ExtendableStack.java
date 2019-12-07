@@ -13,6 +13,7 @@ public class ExtendableStack implements StackInterface {
     public boolean isEmpty(){
         return this.items.length == 0;
     }
+    public int getLength(){return this.items.length;}
 
     private void delFromArray() {
         int[] newarr = new int[this.items.length - 1];

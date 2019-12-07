@@ -3,4 +3,5 @@ public interface StackInterface {
     int pop() throws EmptyStackException;
     void push(int item) throws StackOverflowException;
     boolean isEmpty();
+    int getLength();
 }
