@@ -5,7 +5,7 @@ public class ExtendableStack {
         this.items = new int[0];
     }
 
-    public Integer pop() throws EmptyStackException {
+    public int pop() throws EmptyStackException {
             int item = this.peek();
             delFromArray();
             return item;
