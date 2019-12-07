@@ -7,7 +7,7 @@ public class StackWithPointer {
         this.pointer = -1;
     }
 
-    public Integer pop() throws EmptyStackException {
+    public int pop() throws EmptyStackException {
         if (this.pointer == -1) {
             throw new EmptyStackException();
         }
