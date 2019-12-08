@@ -31,10 +31,12 @@ public class ExtendableStack implements StackInterface {
     }
 
     public void push(int item) throws StackOverflowException {
-       this.pointer = this.pointer+1;
        if(this.pointer+1 > this.items.length - 1) {
        this.items = ArrayOperations.extend(this.item, this.item.length+2);
     }
+this.pointer = this.pointer+1;
+this.items[this.pointer] = item;
+}
 
     public int peek() throws EmptyStackException {
         if (this.pointer == -1) {
