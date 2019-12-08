@@ -1,10 +1,10 @@
 public interface StackInterface {
-    int peek() throws StackException.EmptyStackException, StackException.EmptyStackException;
-    int pop() throws StackException.EmptyStackException, StackException.EmptyStackException;
-    void push(int item) throws StackException.StackOverflowException, StackException.StackOverflowException;
+    int peek() throws EmptyStackException;
+    int pop() throws EmptyStackException;
+    void push(int item) throws StackOverflowException;
     boolean isEmpty();
     int getLength();
-    int search(int item) throws StackException.ElementNotFound, StackException.ElementNotFound;
+    int search(int item) throws ElementNotFound;
     void clear();
     int[] toArray();
 
