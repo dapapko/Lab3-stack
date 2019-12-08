@@ -8,7 +8,7 @@ public class ExtendableStack implements StackInterface {
         return this.items;
     }
 
-    public int pop() throws EmptyStackException {
+    public int pop() throws StackException.EmptyStackException {
             int item = this.peek();
             this.items = ArrayOperations.deleteLastElementFromArray(this.items);
             return item;
@@ -20,7 +20,7 @@ public class ExtendableStack implements StackInterface {
         return this.getLength() == 0;
     }
     public int getLength(){return this.items.length;}
-    public int search(int item) throws ElementNotFound {
+    public int search(int item) throws StackException.ElementNotFound {
         int pos = -1;
         for(int i=0; i < this.items.length;i++) {
             if (this.items[i] == item) {
@@ -28,16 +28,16 @@ public class ExtendableStack implements StackInterface {
                 return pos;
             }
         }
-        throw new ElementNotFound();
+        throw new StackException.ElementNotFound();
     }
 
-    public void push(int item) throws StackOverflowException {
+    public void push(int item) throws StackException.StackOverflowException {
        this.items = ArrayOperations.appendToArray(this.items, item);
     }
 
-    public int peek() throws EmptyStackException {
+    public int peek() throws StackException.EmptyStackException {
         if (this.items.length == 0) {
-            throw new EmptyStackException();
+            throw new StackException.EmptyStackException();
         } else {
             return this.items[this.items.length - 1];
         }

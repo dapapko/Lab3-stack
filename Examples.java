@@ -1,12 +1,12 @@
 public class Examples {
     public static void main(String[] args) {
-       ExtendableStack st1 = new ExtendableStack();
+       FixedStack st1 = new FixedStack(2);
        try {
            st1.push(10);
            st1.push(20);
            st1.push(30);
            st1.pop();
-       } catch (StackOverflowException | EmptyStackException ex) {
+       } catch (StackException.StackOverflowException | StackException.EmptyStackException ex) {
            System.out.println(ex.getMessage());
        }
     }
@@ -30,7 +30,7 @@ public static boolean bracketsValidation(String expression){
                   stack.pop();
               }
       }
-    }  catch (EmptyStackException | StackOverflowException exc) {
+    }  catch (StackException.EmptyStackException | StackException.StackOverflowException exc) {
         return false;
     }
     return stack.isEmpty();
