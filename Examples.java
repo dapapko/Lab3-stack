@@ -1,14 +1,12 @@
 public class Examples {
     public static void main(String[] args) {
-       FixedStack st1 = new FixedStack(2);
-       FixedStack st2 = new FixedStack(2);
+       ExtendableStack st1 = new ExtendableStack();
        try {
            st1.push(10);
            st1.push(20);
-           st2.push(30);
-           st2.push(40);
-           System.out.println(st1.search(60));
-       } catch (StackOverflowException | ElementNotFound ex) {
+           st1.push(30);
+           st1.pop();
+       } catch (StackOverflowException | EmptyStackException ex) {
            System.out.println(ex.getMessage());
        }
     }
