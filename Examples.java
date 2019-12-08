@@ -6,7 +6,7 @@ public class Examples {
            st1.push(20);
            st1.push(30);
            st1.pop();
-       } catch (StackException.StackOverflowException | StackException.EmptyStackException ex) {
+       } catch (StackOverflowException | EmptyStackException ex) {
            System.out.println(ex.getMessage());
        }
     }
@@ -30,7 +30,7 @@ public static boolean bracketsValidation(String expression){
                   stack.pop();
               }
       }
-    }  catch (StackException.EmptyStackException | StackException.StackOverflowException exc) {
+    }  catch (EmptyStackException | StackOverflowException exc) {
         return false;
     }
     return stack.isEmpty();
