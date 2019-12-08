@@ -18,7 +18,7 @@ public class FixedStack implements StackInterface {
         }
         return stackArr;
     }
-public int search(int item) throws StackException.ElementNotFound {
+public int search(int item) throws ElementNotFound {
         int pos = -1;
         for(int i=0; i < this.pointer;i++) {
             if (this.items[i] == item) {
@@ -26,11 +26,11 @@ public int search(int item) throws StackException.ElementNotFound {
                 return pos;
             }
         }
-       throw new StackException.ElementNotFound();
+       throw new ElementNotFound();
 }
-    public int pop() throws StackException.EmptyStackException {
+    public int pop() throws EmptyStackException {
         if (this.pointer == -1) {
-            throw new StackException.EmptyStackException();
+            throw new EmptyStackException();
         }
         int item = this.peek();
         this.items[this.pointer] = 0;
@@ -39,19 +39,19 @@ public int search(int item) throws StackException.ElementNotFound {
     }
     public int getLength() {return this.pointer+1;}
 
-    public void push(int item) throws StackException.StackOverflowException {
+    public void push(int item) throws StackOverflowException {
         try {
             this.pointer = this.pointer + 1;
             this.items[this.pointer] = item;
         } catch (ArrayIndexOutOfBoundsException exc) {
             this.pointer = this.pointer - 1;
-            throw new StackException.StackOverflowException();
+            throw new StackOverflowException();
         }
     }
 
-    public int peek() throws StackException.EmptyStackException {
+    public int peek() throws EmptyStackException {
         if (this.pointer == -1) {
-            throw new StackException.EmptyStackException();
+            throw new EmptyStackException();
         }
         return this.items[this.pointer];
     }
