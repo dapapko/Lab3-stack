@@ -6,8 +6,12 @@ public class ExtendableStack implements StackInterface {
         this.items = new int[size];
     }
     public int[] toArray() {
-        return this.items;
+        int[] arr = new int[pointer+1];
+        for(int i=0;i<pointer+1;i++){
+arr[i] = this.items[i];
     }
+return arr;
+}
 
     public int pop() throws EmptyStackException {
             int item = this.peek();
@@ -20,7 +24,7 @@ public class ExtendableStack implements StackInterface {
     public boolean isEmpty(){
         return this.pointer == -1;
     }
-    public int getLength(){return this.items.length;}
+    public int getLength(){return this.pointer +1;}
     public int search(int item) throws ElementNotFound {
         for(int i=0; i < this.items.length;i++) {
             if (this.items[i] == item) {
