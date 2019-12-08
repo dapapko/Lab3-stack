@@ -19,4 +19,10 @@ public  class ArrayOperations {
         newarr[arr.length] = item;
         return newarr;
     }
+public static int[] extend(int[] arr, int delta) {
+int[] newarr = new int[arr.length+delta];
+for (int i = 0; i < arr.length; i++) {
+            newarr[i] = arr[i];
+        }
+return newarr;
 }
