@@ -8,7 +8,7 @@ public  class ArrayOperations {
         }
       return newarr;
     }
-    public static int[] appendToArray(int[] arr, int item)  throws StackException.StackOverflowException {
+    public static int[] appendToArray(int[] arr, int item)  throws StackOverflowException {
         if (arr.length +1 > Integer.MAX_VALUE - 2) {
             throw new StackException.StackOverflowException();
         }
