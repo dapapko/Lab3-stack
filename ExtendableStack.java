@@ -36,7 +36,7 @@ return arr;
 
     public void push(int item) throws StackOverflowException {
        if(this.pointer+1 > this.items.length - 1) {
-       this.items = ArrayOperations.extend(this.item, this.item.length+2);
+       this.items = ArrayOperations.extend(this.item);
     }
 this.pointer = this.pointer+1;
 this.items[this.pointer] = item;
