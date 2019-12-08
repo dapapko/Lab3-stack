@@ -1,3 +1,4 @@
+
 public class FixedStack implements StackInterface {
     private int[] items;
     private int pointer;
@@ -6,31 +7,32 @@ public class FixedStack implements StackInterface {
         this.items = new int[stackSize];
         this.pointer = -1;
     }
+
     public void clear() {
         this.pointer = -1;
     }
-    public int[] toArray() {
+    public int[] toArray()  {
         int[] stackArr = new int[pointer+1];
         for(int i=0; i<this.pointer+1;i++) {
             stackArr[i] = this.items[i];
         }
         return stackArr;
     }
-public int search(int item) {
+public int search(int item) throws ElementNotFound {
         int pos = -1;
         for(int i=0; i < this.pointer;i++) {
             if (this.items[i] == item) {
                 pos = i;
-                break;
+                return pos;
             }
         }
-        return pos;
+       throw new ElementNotFound();
 }
     public int pop() throws EmptyStackException {
         if (this.pointer == -1) {
             throw new EmptyStackException();
         }
-        int item = this.top();
+        int item = this.peek();
         this.items[this.pointer] = 0;
         this.pointer = this.pointer - 1;
         return item;
@@ -47,14 +49,13 @@ public int search(int item) {
         }
     }
 
-    public int top() throws EmptyStackException {
+    public int peek() throws EmptyStackException {
         if (this.pointer == -1) {
             throw new EmptyStackException();
         }
         return this.items[this.pointer];
     }
     public boolean isEmpty(){
-        return this.pointer == -1;
+        return this.getLength() == 0;
     }
-
 }

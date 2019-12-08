@@ -1,18 +1,15 @@
 public class Examples {
     public static void main(String[] args) {
-       FixedStack st1 = new FixedStack(5);
+       FixedStack st1 = new FixedStack(2);
+       FixedStack st2 = new FixedStack(2);
        try {
            st1.push(10);
            st1.push(20);
-           st1.push(30);
-           st1.push(40);
+           st2.push(30);
+           st2.push(40);
            System.out.println(st1.search(60));
-       } catch (StackOverflowException ex) {
-           System.out.println("Stack overflow");
-       }
-       int[] arr = st1.toArray();
-       for(int a:arr) {
-           System.out.println(a);
+       } catch (StackOverflowException | ElementNotFound ex) {
+           System.out.println(ex.getMessage());
        }
     }
 public static char[] stringToListOfChars(String str) {
@@ -22,6 +19,8 @@ public static char[] stringToListOfChars(String str) {
     }
     return expList;
 }
+
+
 public static boolean bracketsValidation(String expression){
       char[] strList = expression.toCharArray();
       ExtendableStack stack = new ExtendableStack();

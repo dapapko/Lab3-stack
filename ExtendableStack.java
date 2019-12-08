@@ -7,8 +7,9 @@ public class ExtendableStack implements StackInterface {
     public int[] toArray() {
         return this.items;
     }
+
     public int pop() throws EmptyStackException {
-            int item = this.top();
+            int item = this.peek();
             delFromArray();
             return item;
     }
@@ -16,18 +17,18 @@ public class ExtendableStack implements StackInterface {
         this.items = new int[0];
     }
     public boolean isEmpty(){
-        return this.items.length == 0;
+        return this.getLength() == 0;
     }
     public int getLength(){return this.items.length;}
-    public int search(int item) {
+    public int search(int item) throws ElementNotFound {
         int pos = -1;
         for(int i=0; i < this.items.length;i++) {
             if (this.items[i] == item) {
                 pos = i;
-                break;
+                return pos;
             }
         }
-        return pos;
+        throw new ElementNotFound();
     }
     private void delFromArray() {
         int[] newarr = new int[this.items.length - 1];
@@ -49,7 +50,7 @@ public class ExtendableStack implements StackInterface {
         this.items = newarr;
     }
 
-    public int top() throws EmptyStackException {
+    public int peek() throws EmptyStackException {
         if (this.items.length == 0) {
             throw new EmptyStackException();
         } else {
