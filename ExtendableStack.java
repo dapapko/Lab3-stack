@@ -1,8 +1,9 @@
 public class ExtendableStack implements StackInterface {
     private int[] items;
+    private int pointer = -1;
 
-    public ExtendableStack() {
-        this.items = new int[0];
+    public ExtendableStack(int size) {
+        this.items = new int[size];
     }
     public int[] toArray() {
         return this.items;
@@ -10,36 +11,36 @@ public class ExtendableStack implements StackInterface {
 
     public int pop() throws EmptyStackException {
             int item = this.peek();
-            this.items = ArrayOperations.deleteLastElementFromArray(this.items);
+            this.pointer = this.pointer -1;
             return item;
     }
     public void clear(){
-        this.items = new int[0];
+        this.pointer = -1;
     }
     public boolean isEmpty(){
-        return this.getLength() == 0;
+        return this.pointer == -1;
     }
     public int getLength(){return this.items.length;}
     public int search(int item) throws ElementNotFound {
-        int pos = -1;
         for(int i=0; i < this.items.length;i++) {
             if (this.items[i] == item) {
-                pos = i;
-                return pos;
+                return i;
             }
         }
         throw new ElementNotFound();
     }
 
     public void push(int item) throws StackOverflowException {
-       this.items = ArrayOperations.appendToArray(this.items, item);
+       this.pointer = this.pointer+1;
+       if(this.pointer+1 > this.items.length - 1) {
+       this.items = ArrayOperations.extend(this.item, this.item.length+2);
     }
 
     public int peek() throws EmptyStackException {
-        if (this.items.length == 0) {
+        if (this.pointer == -1) {
             throw new EmptyStackException();
         } else {
-            return this.items[this.items.length - 1];
+            return this.items[this.pointer];
         }
     }
 }
