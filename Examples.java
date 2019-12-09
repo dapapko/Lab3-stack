@@ -1,11 +1,15 @@
 public class Examples {
     public static void main(String[] args) {
-        FixedStack st1 = new FixedStack(2);
+        ExtendableStackWithPointer st1 = new ExtendableStackWithPointer();
         try {
             st1.push(10);
             st1.push(20);
             st1.push(30);
+            st1.push(40);
+            st1.push(50);
             st1.pop();
+            int last = st1.peek();
+            System.out.println(last);
         } catch (StackOverflow | EmptyStack ex) {
             System.out.println(ex.getMessage());
         }
