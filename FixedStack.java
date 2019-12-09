@@ -7,10 +7,15 @@ public class FixedStack implements StackInterface {
         this.pointer = -1;
     }
 
-    public void clear() {
+    public void reset() {
         this.pointer = -1;
     }
-
+    
+    public void clear() {
+        this.pointer = -1;
+        int currentItemsLength = this.items.length;
+        this.items = new int[currentItemsLength];
+    }
     public int[] toArray() {
         int[] stackArr = new int[pointer + 1];
         for (int i = 0; i < this.pointer + 1; i++) {
