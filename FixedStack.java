@@ -10,7 +10,7 @@ public class FixedStack implements StackInterface {
     public void reset() {
         this.pointer = -1;
     }
-    
+
     public void clear() {
         this.pointer = -1;
         int currentItemsLength = this.items.length;
@@ -25,11 +25,9 @@ public class FixedStack implements StackInterface {
     }
 
     public int search(int item) throws ElementNotFound {
-        int pos = -1;
         for (int i = 0; i < this.pointer; i++) {
             if (this.items[i] == item) {
-                pos = i;
-                return pos;
+               return i;
             }
         }
         throw new ElementNotFound();
