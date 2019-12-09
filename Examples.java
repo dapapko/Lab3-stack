@@ -6,7 +6,7 @@ public class Examples {
             st1.push(20);
             st1.push(30);
             st1.pop();
-        } catch (StackException.StackOverflowException | StackException.EmptyStackException ex) {
+        } catch (StackOverflow | EmptyStack ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -31,7 +31,7 @@ public class Examples {
                     stack.pop();
                 }
             }
-        } catch (StackException.EmptyStackException | StackException.StackOverflowException exc) {
+        } catch (EmptyStack | StackOverflow exc) {
             return false;
         }
         return stack.isEmpty();

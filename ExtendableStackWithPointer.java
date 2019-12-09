@@ -2,8 +2,8 @@ public class ExtendableStackWithPointer implements StackInterface {
     private int[] items;
     private int pointer = -1;
 
-    public ExtendableStackWithPointer(int size) {
-        this.items = new int[size];
+    public ExtendableStackWithPointer() {
+        this.items = new int[3];
     }
 
     public int[] toArray() {
