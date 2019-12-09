@@ -15,7 +15,9 @@ public class ExtendableStack implements StackInterface {
         return item;
     }
 
-public void clear() { this.items = new int[0]; }
+    public void clear() {
+        this.items = new int[0];
+    }
 
     public boolean isEmpty() {
         return this.getLength() == 0;

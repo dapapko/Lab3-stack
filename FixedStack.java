@@ -9,10 +9,11 @@ public class FixedStack implements StackInterface {
         this.capacity = stackSize;
     }
 
-public void clear() {
+    public void clear() {
         this.pointer = -1;
         this.items = new int[capacity];
-}
+    }
+
     public int[] toArray() {
         int[] stackArr = new int[pointer + 1];
         for (int i = 0; i < this.pointer + 1; i++) {
@@ -24,7 +25,7 @@ public void clear() {
     public int search(int item) throws ElementNotFound {
         for (int i = 0; i < this.pointer; i++) {
             if (this.items[i] == item) {
-               return i;
+                return i;
             }
         }
         throw new ElementNotFound();
