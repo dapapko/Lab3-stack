@@ -10,8 +10,10 @@ public class Examples {
             st1.pop();
             int result = reversePolishNotationCalculator("23+4*");
             System.out.println("Result: " + result);
+            String polishexp = normalToPolish("2+(3*4)");
             int last = st1.peek();
             System.out.println(last);
+            System.out.println(polishexp);
         } catch (StackOverflow | EmptyStack ex) {
             System.out.println(ex.getMessage());
         }
@@ -23,6 +25,27 @@ public class Examples {
             }
         }
         return false;
+    }
+    public static String normalToPolish(String exp) throws StackOverflow, EmptyStack {
+        int counter = 0;
+        StringBuilder polishExpression = new StringBuilder();
+        char[] operators = new char[]{'+', '-', '*', '/'};
+        ExtendableCharStack stack = new ExtendableCharStack();
+        char[] expArray = exp.toCharArray();
+        for (int i = 0; i < expArray.length; i++) {
+            if (In(operators, expArray[i])) {
+                System.out.println("Adding " + expArray[i]);
+               stack.push(expArray[i]);
+                counter++;
+            } else if (expArray[i] != '(' && expArray[i] != ')') {
+                polishExpression.append(expArray[i]);
+                for(int j=0;j<counter;j++) {
+                    polishExpression.append(stack.pop());
+                }
+                counter =0;
+            }
+        }
+        return polishExpression.toString();
     }
     public static int reversePolishNotationCalculator(String expression) throws StackOverflow, EmptyStack {
         int counter =0;
