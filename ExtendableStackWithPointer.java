@@ -20,15 +20,10 @@ public class ExtendableStackWithPointer implements StackInterface {
         return item;
     }
 
-    public void reset() {
-        this.pointer = -1;
-    }
-
-    public void clear() {
+public void clear() {
         this.pointer = -1;
         this.items = new int[3];
-    }
-
+}
     public boolean isEmpty() {
         return this.pointer == -1;
     }

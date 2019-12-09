@@ -5,7 +5,7 @@ public interface StackInterface {
     boolean isEmpty();
     int getLength();
     int search(int item) throws  ElementNotFound;
-    void clear();
     int[] toArray();
+    void clear();
 
 }
