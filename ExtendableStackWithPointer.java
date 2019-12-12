@@ -1,3 +1,5 @@
+import java.util.EmptyStackException;
+
 public class ExtendableStackWithPointer implements StackInterface {
     private int[] items;
     private int pointer = -1;
@@ -14,7 +16,7 @@ public class ExtendableStackWithPointer implements StackInterface {
         return arr;
     }
 
-    public int pop() throws EmptyStack {
+    public int pop() throws EmptyStackException {
         int item = this.peek();
         this.pointer = this.pointer - 1;
         return item;
@@ -42,7 +44,7 @@ public class ExtendableStackWithPointer implements StackInterface {
         throw new ElementNotFound();
     }
 
-    public void push(int item) throws StackOverflow {
+    public void push(int item) throws StackOverflowError {
         if (this.pointer + 1 > this.items.length - 1) {
             this.items = ArrayOperations.extend(this.items);
         }
@@ -50,9 +52,9 @@ public class ExtendableStackWithPointer implements StackInterface {
         this.items[this.pointer] = item;
     }
 
-    public int peek() throws EmptyStack {
+    public int peek() throws EmptyStackException {
         if (this.pointer == -1) {
-            throw new EmptyStack();
+            throw new EmptyStackException();
         } else {
             return this.items[this.pointer];
         }

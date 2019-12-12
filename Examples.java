@@ -1,119 +1,110 @@
+import java.util.Random;
+
 public class Examples {
+public static int pointer = -1;
+public static int[] items = new int[20];
+public static void push(int item) {
+if (pointer +1 == items.length-1) {
+    items = ArrayOperations.extend(items);
+};
+    pointer++;
+    items[pointer] = item;
+}
+
+public static int peek() {
+if (pointer == -1) {
+    System.out.println("Error");
+    return -1;
+}
+return items[pointer];
+}
+public static int pop() {
+int item = peek();
+pointer--;
+return item;
+}
     public static void main(String[] args) {
-        ExtendableStackWithPointer st1 = new ExtendableStackWithPointer();
-        try {
-            st1.push(10);
-            st1.push(20);
-            st1.push(30);
-            st1.push(40);
-            st1.push(50);
-            st1.pop();
-            int result = reversePolishNotationCalculator("23+4*");
-            System.out.println("Result: " + result);
-            String polishexp = normalToPolish("2+(3*4)");
-            int last = st1.peek();
-            System.out.println(last);
-            System.out.println(polishexp);
-        } catch (StackOverflow | EmptyStack ex) {
-            System.out.println(ex.getMessage());
+    int length, sublength, module;
+    String sortingType;
+    if (args.length  == 4) {
+        length = Integer.parseInt(args[0]);
+        sublength = Integer.parseInt(args[1]);
+        module = Integer.parseInt(args[2]);
+        sortingType = args[3];
+    } else {
+        length = 5;
+        sublength = 7;
+        module = 20;
+        sortingType = "asc";
+    }
+        int[][] twoDimArray = TwoDimensionalArr.random2dArr(length, sublength, module);
+        int max = TwoDimensionalArr.globalMax(twoDimArray);
+        int min = TwoDimensionalArr.globalMin(twoDimArray);
+        System.out.println("Two dimensional array");
+        TwoDimensionalArr.printTwoDimArr(twoDimArray);
+        System.out.println("Maximum:");
+        System.out.println(max);
+        System.out.println("Indexes:");
+        TwoDimensionalArr.printIndexes(twoDimArray, max);
+        System.out.println("Minimum:");
+        System.out.println(min);
+        System.out.println("Indexes:");
+        TwoDimensionalArr.printIndexes(twoDimArray, min);
+        System.out.println("Sorting: ");
+        if(sortingType.equals("both")) {
+            System.out.println("Ascending sorted: ");
+            TwoDimensionalArr.printSorted(twoDimArray);
+            System.out.println("Descending sorted: ");
+            TwoDimensionalArr.printSorted(twoDimArray);
+        } else if (sortingType.equals("desc")) {
+            System.out.println("Descending sorted: ");
+            TwoDimensionalArr.printSorted(twoDimArray);
+        } else {
+            System.out.println("Ascending sorted: ");
+            TwoDimensionalArr.printSorted(twoDimArray);
         }
     }
-    public static boolean In(char[] arr, char item) {
-        for(int i=0;i<arr.length;i++) {
-            if (arr[i] == item) {
-                return true;
-            }
+
+    public static void main2(String[] args) {
+        if (args.length == 0) {
+            System.out.println("You should pass one of the arguments first: randperm, oneloop, randarrperm");
+            return;
         }
-        return false;
-    }
-    public static String normalToPolish(String exp) throws StackOverflow, EmptyStack {
-        int counter = 0;
-        StringBuilder polishExpression = new StringBuilder();
-        char[] operators = new char[]{'+', '-', '*', '/'};
-        ExtendableCharStack stack = new ExtendableCharStack();
-        char[] expArray = exp.toCharArray();
-        for (int i = 0; i < expArray.length; i++) {
-            if (In(operators, expArray[i])) {
-                System.out.println("Adding " + expArray[i]);
-               stack.push(expArray[i]);
-                counter++;
-            } else if (expArray[i] != '(' && expArray[i] != ')') {
-                polishExpression.append(expArray[i]);
-                for(int j=0;j<counter;j++) {
-                    polishExpression.append(stack.pop());
-                }
-                counter =0;
-            }
-        }
-        return polishExpression.toString();
-    }
-    public static int reversePolishNotationCalculator(String expression) throws StackOverflow, EmptyStack {
-        int counter =0;
-        char[] operators = new char[]{'+', '-', '*', '/'};
-        ExtendableStackWithPointer stack = new ExtendableStackWithPointer();
-        char[] expArray = expression.toCharArray();
-        for(int i=0; i< expArray.length;i++){
-            if (!In(operators, expArray[i] )) {
-                int number = Character.getNumericValue(expArray[i]);
-                stack.push(number);
-                counter++;
+        if (args[0].equals("randperm")) {
+            Permutations.randperm();
+        } else if (args[0].equals("oneloop")) {
+            Permutations.oneloop();
+        } else if (args[0].equals("randarrperm")) {
+            int length = 0;
+            int loops = 0;
+            if (args.length == 3 ) {
+                length = Integer.parseInt(args[1]);
+                loops = Integer.parseInt(args[2]);
             } else {
-                int res = 0;
-                if(expArray[i] == '+') {
-                    for(int k=0;k<counter;k++) {
-                        res += stack.pop();
-                    }
-                    stack.push(res);
-                    counter =0;
-                } else if (expArray[i] == '-') {
-                    for(int k=0;k<counter;k++) {
-                        res -= stack.pop();
-                    }
-                    stack.push(res);
-                    counter =0;
-                }  else if (expArray[i] == '*') {
-                    res = stack.pop();
-                    for(int k=0;k<counter;k++) {
-                        res *= stack.pop();
-                    }
-                    stack.push(res);
-                    counter =0;
-                }  else if (expArray[i] == '/') {
-                    res = stack.pop();
-                    for(int k=0;k<counter;k++) {
-                        res /= stack.pop();
-                    }
-                    stack.push(res);
-                    counter =0;
-                }
-
+                length =7;
+                loops = 3;
             }
+            Permutations.randarrperm(length, loops);
+        } else {
+            System.out.println("You should pass one of the arguments first: randperm, oneloop, randarrperm");
         }
-        return stack.pop();
     }
-    public static char[] stringToListOfChars(String str) {
-        char[] expList = new char[str.length()];
-        for (int i = 0; i < str.length(); i++) {
-            expList[i] = str.charAt(i);
+public static void main3 (String[] args) {
+        int push, pop, stackQuantity;
+        if(args.length == 3) {
+            pop = Integer.parseInt(args[0]);
+            push = Integer.parseInt(args[1]);
+            stackQuantity = Integer.parseInt(args[2]);
+        } else {
+            pop = 20;
+            push = 30;
+            stackQuantity = 5;
         }
-        return expList;
-    }
+        Permutations.stackSequence(pop,push,stackQuantity);
+}
+public static void main5(String[] args) {
+    push(5);
+    System.out.println(peek());
+}
 
-
-    public static boolean bracketsValidation(String expression) {
-        char[] strList = expression.toCharArray();
-        ExtendableStack stack = new ExtendableStack();
-        try {
-            for (int j = 0; j < strList.length; j++) {
-                if (strList[j] == '(') {
-                    stack.push(7);
-                } else if (strList[j] == ')') {
-                    stack.pop();
-                }
-            }
-        } catch (EmptyStack | StackOverflow exc) {
-            return false;
-        }
-        return stack.isEmpty();
-    }
 }

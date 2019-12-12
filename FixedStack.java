@@ -1,3 +1,5 @@
+import java.util.EmptyStackException;
+
 public class FixedStack implements StackInterface {
     private int[] items;
     private int pointer;
@@ -31,9 +33,9 @@ public class FixedStack implements StackInterface {
         throw new ElementNotFound();
     }
 
-    public int pop() throws EmptyStack {
+    public int pop() throws EmptyStackException {
         if (this.pointer == -1) {
-            throw new EmptyStack();
+            throw new EmptyStackException();
         }
         int item = this.peek();
         this.items[this.pointer] = 0;
@@ -45,19 +47,19 @@ public class FixedStack implements StackInterface {
         return this.pointer + 1;
     }
 
-    public void push(int item) throws StackOverflow {
+    public void push(int item) throws StackOverflowError {
         try {
             this.pointer = this.pointer + 1;
             this.items[this.pointer] = item;
         } catch (ArrayIndexOutOfBoundsException exc) {
             this.pointer = this.pointer - 1;
-            throw new StackOverflow();
+            throw new StackOverflowError();
         }
     }
 
-    public int peek() throws EmptyStack {
+    public int peek() throws EmptyStackException {
         if (this.pointer == -1) {
-            throw new EmptyStack();
+            throw new EmptyStackException();
         }
         return this.items[this.pointer];
     }

@@ -1,3 +1,4 @@
+import java.util.EmptyStackException;
 import java.util.Random;
 
 class Permutations {
@@ -40,14 +41,7 @@ class Permutations {
         System.out.println();
     }
 
-    public static int[] getRandomArray(int length) {
-        Random rand = new Random();
-        int[] arr = new int[length];
-        for (int i = 0; i < length; i++) {
-            arr[i] = rand.nextInt();
-        }
-        return arr;
-    }
+
 
     public static int[] getLoop(int[] sequence, int[] permutation) {
         int[] loop = new int[0];
@@ -143,6 +137,67 @@ class Permutations {
         return indexes;
     }
 
+    public static void randomSequenceFromStack() {
+        ExtendableStackWithPointer stack = new ExtendableStackWithPointer();
+        ExtendableStackWithPointer insertions = new ExtendableStackWithPointer();
+        ExtendableStackWithPointer popped = new ExtendableStackWithPointer();
+        Random rand = new Random();
+        int len = rand.nextInt(25) + 5;
+        try {
+            for (int i = 0; i < len; i++) {
+                boolean choice = rand.nextBoolean();
+                if (choice) {
+                    int item = rand.nextInt();
+                    stack.push(item);
+                    insertions.push(item);
+                } else {
+                    int element = stack.pop();
+                    popped.push(element);
+                }
+            }
+        } catch (EmptyStackException ex) {
+            System.out.println("Error. You've tried to get something from empty stack");
+        } finally {
+            System.out.print("Popped elements: ");
+            ArrayOperations.printArr(popped.toArray());
+            System.out.println();
+            System.out.print("Insertions: ");
+            ArrayOperations.printArr(insertions.toArray());
+        }
+    }
+
+    public static void stackSequence(int pop, int push, int stackQuantity) {
+        Random rand = new Random();
+        for (int i = 0; i < stackQuantity; i++) {
+            ExtendableStackWithPointer stack = new ExtendableStackWithPointer();
+            ExtendableStackWithPointer insertions = new ExtendableStackWithPointer();
+            ExtendableStackWithPointer popped = new ExtendableStackWithPointer();
+            for (int j = 0; j < push; j++) {
+                int item = rand.nextInt();
+                stack.push(item);
+                insertions.push(item);
+            }
+            try {
+                for (int k = 0; k < pop; k++) {
+                    int item = stack.pop();
+                    popped.push(item);
+                }
+
+            } catch (EmptyStackException exc) {
+                System.out.println("You've tried to get something from empty stack!");
+                return;
+            }
+            System.out.print("Popped elements: ");
+            ArrayOperations.printArr(popped.toArray());
+            System.out.println();
+            System.out.print("Inserted elements: ");
+
+            ArrayOperations.printArr(insertions.toArray());
+            System.out.println();
+            System.out.println();
+        }
+    }
+
     public static void randperm() {
         int[] arr = new int[]{7, 8, 9, 10, 11, 12, 16};
         System.out.println("Initial sequence");
@@ -156,18 +211,20 @@ class Permutations {
         System.out.println("Loops count: ");
         printLoops(sequence, shuffled, arr);
     }
+
     public static void oneloop() {
         int[] arr = new int[]{7, 8, 9, 10, 11, 12, 16};
         int[] sequence = getArrayOfIndexes(arr);
         generatePermutationWithOneLoop(sequence, arr);
     }
+
     public static void randarrperm(int length, int loops) {
-        if(length < 2 ) {
+        if (length < 2) {
             System.out.println("Length must be more than 1");
             return;
         }
-        int[] arr = getRandomArray(length);
-        System.out.println("Array:");
+        int[] arr = ArrayOperations.getRandomArray(length);
+        System.out.println("Initial sequence:");
         ArrayOperations.printArr(arr);
         System.out.println();
         permutationWithGivenNumberOfLoops(arr, loops);
