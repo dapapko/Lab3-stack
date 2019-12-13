@@ -23,15 +23,27 @@ class Permutations {
         shuffled = ArrayOperations.appendToArr(shuffled, arr[0]);
         return shuffled;
     }
-
-    public static boolean countOrNot(int[] permutation) {
-        int check = permutation[0];
-        for (int j = 0; j < permutation.length; j++) {
-            if (permutation[j] != check) {
-                return true;
-            }
+public static boolean checkIndexes(int[] permutation) {
+    int check = permutation[0];
+    int memberCheck = permutation[0];
+    for (int j = 0; j < permutation.length; j++) {
+        if (permutation[j] != check) {
+            return true;
         }
-        return false;
+    }
+    return false;
+}
+public static boolean checkMembers(int[] permutation, int[] array) {
+    int memberCheck = permutation[0];
+    for(int k=0;k<array.length;k++) {
+        if (array[k] != memberCheck) {
+            return true;
+        }
+    }
+    return false;
+}
+    public static boolean countOrNot(int[] permutation, int[] array) {
+        return checkIndexes(permutation) && checkMembers(permutation, array);
     }
 
     public static void indexesToMembers(int[] array, int[] indexes) {
@@ -59,12 +71,12 @@ class Permutations {
         }
     }
 
-    public static int countLoops(int[] sequence, int[] permutation) {
+    public static int countLoops(int[] sequence, int[] permutation, int[] array) {
         int loopCounter = 0;
         while (sequence.length > 1) {
             int[] loop = getLoop(sequence, permutation);
             sequence = ArrayOperations.difference(sequence, loop);
-            if (countOrNot(loop)) {
+            if (countOrNot(loop, array)) {
                 loopCounter++;
             }
         }
@@ -76,7 +88,7 @@ class Permutations {
         while (sequence.length > 1) {
             int[] loop = getLoop(sequence, permutation);
             sequence = ArrayOperations.difference(sequence, loop);
-            if (countOrNot(loop)) {
+            if (countOrNot(loop, array)) {
                 indexesToMembers(array, loop);
                 counter++;
             }
@@ -87,7 +99,7 @@ class Permutations {
     public static void generatePermutationWithOneLoop(int[] sequence, int[] array) {
         while (true) {
             int[] sequenceCopy = shuffle(sequence);
-            int counter = countLoops(sequence, sequenceCopy);
+            int counter = countLoops(sequence, sequenceCopy, array);
             if (counter == 1) {
                 System.out.println("Initial sequence:");
                 ArrayOperations.printArr(array);
@@ -117,7 +129,7 @@ class Permutations {
         int[] sequenceCopy = ArrayOperations.copy(sequence);
         while (true) {
             sequenceCopy = shuffle(sequenceCopy);
-            int loopsCount = countLoops(sequence, sequenceCopy);
+            int loopsCount = countLoops(sequence, sequenceCopy, array);
             if (loopsCount == loops) {
                 System.out.println("Permutation: ");
                 indexesToMembers(array, sequenceCopy);
@@ -208,7 +220,7 @@ class Permutations {
         System.out.println("Permutation:");
         indexesToMembers(arr, shuffled);
         System.out.println();
-        System.out.println("Loops count: ");
+        System.out.println("Loops:  ");
         printLoops(sequence, shuffled, arr);
     }
 
